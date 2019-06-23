@@ -15,29 +15,24 @@ It can work with any database supported by a Laravel database driver.
 
 ## Usage
 
-<b>Step 1</b>: Clone this repository to your PC.
+### <b>Step 1</b>: Clone this repository to your PC.
 
 ```bash
 git clone https://github.com/tumainimosha/sms-sender.git
 ```
 
-<b>Step 2</b>: Configure Environment variables
+### <b>Step 2</b>: Configure Environment variables
 
 Rename the `.env.example` file to `.env`
 
 Edit `.env` file and substitute your credentials
 
-Set infobip api credentials
 ```dotenv
 # Infobip Credentials
 INFOBIP_USERNAME=infobip-user
 INFOBIP_PASSWORD=infobip-pass
 INFOBIP_FROM="SENDER NAME"
-```
 
-Set database credentials
-
-```dotenv
 # Database Credentials
 DB_CONNECTION=oracle # Valid values: oracle, pgsql, mysql, sqlsrv, sqlite 
 DB_HOST=10.10.0.5
@@ -47,30 +42,37 @@ DB_USERNAME=
 DB_PASSWORD=
 ```
 
-<b>Step 3</b>: Install composer dependencies
+### <b>Step 3</b>: Install composer dependencies
 
-* This step requires you to have at-least `PHP7.1`, `composer` installed.
+* This step requires you to have `php-7` and `composer` installed on your machine
+
 * Ensure your PHP installation has necessary database driver for database you are working with.
 
-Step 4: Setup database table
+```bash
+composer install
+```
+
+### <b>Step 4</b>: Setup database table
 
 * <i>Option 1</i>: use the default table schema for messages
 
 | outgoing_sms             |
 |--------------------------|
-| id PRIMARY_KEY           |
-| msisdn VARCHAR(255)      |
-| text TEXT                |
-| sender_name VARCHAR(255) |
-| sent_at TIMESTAMP        |
+| id           <span style="text-align:right">PRIMARY_KEY</span>       |
+| msisdn       <span style="text-align:right">VARCHAR(255)</span>      |
+| text         <span style="text-align:right">TEXT</span>              |
+| sender_name  <span style="text-align:right">VARCHAR(255)</span>      |
+| sent_at      <span style="text-align:right">TIMESTAMP </span>        |
 
-You can create this table yourself directly on your db or use the scripts migration to create it
+You can create this table yourself directly on your DB 
+
+OR 
+
+use the scripts migration to create it
 
 ```bash
 php sms-sender migrate
 ```
-
-The migrate script will create this table for you
 
 * <i>Option 2</i>: use your own custom table schema for messages
 
@@ -86,7 +88,7 @@ COLUMN_SENDER_NAME=sender_name
 COLUMN_SENT_AT=sent_at
 ```
 
-<b>Step 5</b>: Test running the script
+### <b>Step 5</b>: Test running the script
 
 ```bash
 $ php sms-sender process         
@@ -94,7 +96,7 @@ Fetch pending messages from DB: ✔
 Sending messages: ✔
 ```
 
-<b>Step 6</b>: Schedule the script to run at given intervals 
+### <b>Step 6</b>: Schedule the script to run at given intervals 
 
 You can schedule it using your OS's task schedule to run at given intervals, say once per minute.
 
