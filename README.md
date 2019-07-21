@@ -68,13 +68,13 @@ composer install
 
 * <i>Option 1</i>: use the default table schema for messages
 
-| outgoing_sms             |
-|--------------------------|
-| <b>id</b>           <span style="text-align:right; font-style: italic">PRIMARY_KEY</span>       |
-| <b>msisdn</b>       <span style="text-align:right; font-style: italic">VARCHAR(255)</span>      |
-| <b>text</b>         <span style="text-align:right; font-style: italic">TEXT</span>              |
-| <b>sender_name</b>  <span style="text-align:right; font-style: italic">VARCHAR(255)</span>      |
-| <b>sent_at<b>      <span style="text-align:right; font-style: italic">TIMESTAMP </span>        |
+| outgoing_sms  ||
+|-------------------|-------:|
+| <b>id</b>         |  <span style="font-style: italic">PRIMARY_KEY</span>       |
+| <b>msisdn</b>     |  <span style="font-style: italic">VARCHAR(255)</span>      |
+| <b>text</b>       |  <span style="font-style: italic">TEXT</span>              |
+| <b>sender_name</b>|  <span style="font-style: italic">VARCHAR(255)</span>      |
+| <b>sent_at</b>    |  <span style="font-style: italic">TIMESTAMP </span>        |
 
 You can create this table yourself directly on your DB 
 
