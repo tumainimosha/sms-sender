@@ -5,3 +5,4 @@
 /database/database.sqlite
 .env
 /builds
+.php_cs.cache
