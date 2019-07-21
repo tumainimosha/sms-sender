@@ -31,7 +31,7 @@ return [
         /**
          * SMS Sender ID column name.
          */
-        'sender_name' => env('COLUMN_SENDER_NAME', 'sender_name'),
+        'sender_name' => env('COLUMN_SENDER', 'sender_name'),
 
         /**
          * Time sms was sent column name.

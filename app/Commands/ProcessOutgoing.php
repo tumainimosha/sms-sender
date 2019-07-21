@@ -2,6 +2,7 @@
 
 namespace App\Commands;
 
+use App\Models\OutgoingSms;
 use App\Services\SmsService;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\Facades\DB;
@@ -32,20 +33,20 @@ class ProcessOutgoing extends Command
     {
         $messages = collect();
 
-        $this->task('Fetch pending messages from DB', function () use (&$messages) {
-            $table = config('sms-sender.table_name');
-            $sent_at_column = config('sms-sender.column.sent_at');
-            $take = config('sms-sender.take');
+		$table = config('sms-sender.table_name');
+		
+        $this->task('Fetch pending messages from DB', function () use (&$messages, $table) {
+            
+			$sent_at_column = config('sms-sender.column.sent_at');
 
             $messages = DB::table($table)
                 ->whereNull($sent_at_column)
-                ->limit($take)
                 ->get();
 
             return true;
         });
 
-        $this->task('Sending messages', function () use ($messages) {
+        $this->task('Sending messages', function () use ($messages, $table) {
             if (empty($messages)) {
                 logger('No PENDING messages to send');
 
@@ -60,7 +61,6 @@ class ProcessOutgoing extends Command
                 $text_column = config('sms-sender.column.text');
                 $sent_at_column = config('sms-sender.column.sent_at');
                 $from_column = config('sms-sender.column.sender_name');
-                $table = config('sms-sender.table_name');
 
                 $msisdn = $message->$msisdn_column;
                 $text = $message->$text_column;
@@ -71,6 +71,7 @@ class ProcessOutgoing extends Command
 
                 $smsService->send($msisdn, $text, $from);
 
+				
                 DB::table($table)
                     ->update([
                         "$sent_at_column" => now(),
