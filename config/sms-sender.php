@@ -2,7 +2,7 @@
 
 return [
 
-    'take' => config('MAX_TAKE_RUN', 100),
+    'take' => env('MAX_TAKE_RUN', 100),
 
     /**
      * Table name used for outgoing sms.

@@ -33,12 +33,14 @@ class ProcessOutgoing extends Command
         $messages = collect();
 
         $table = config('sms-sender.table_name');
-        
-        $this->task('Fetch pending messages from DB', function () use (&$messages, $table) {
+        $take = config('sms-sender.take');
+
+        $this->task('Fetch pending messages from DB', function () use (&$messages, $table, $take) {
             $sent_at_column = config('sms-sender.column.sent_at');
 
             $messages = DB::table($table)
                 ->whereNull($sent_at_column)
+                ->limit($take)
                 ->get();
 
             return true;
