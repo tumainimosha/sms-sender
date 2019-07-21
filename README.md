@@ -114,7 +114,7 @@ TABLE_OUTGOING_SMS=outgoing_sms
 COLUMN_PRIMARY_KEY=id
 COLUMN_MSISDN=msisdn
 COLUMN_TEXT=text
-COLUMN_SENDER_NAME=sender_name
+COLUMN_SENDER=sender_name
 COLUMN_SENT_AT=sent_at
 ```
 
