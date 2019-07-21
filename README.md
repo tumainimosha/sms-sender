@@ -34,12 +34,24 @@ INFOBIP_PASSWORD=infobip-pass
 INFOBIP_FROM="SENDER NAME"
 
 # Database Credentials
-DB_CONNECTION=oracle # Valid values: oracle, pgsql, mysql, sqlsrv, sqlite 
+DB_CONNECTION=oracle
 DB_HOST=10.10.0.5
 DB_PORT=1521
 DB_DATABASE=
 DB_USERNAME=
 DB_PASSWORD=
+DB_SERVICE_NAME=
+
+# Maximum number of messages sent per script run
+MAX_TAKE_RUN=100
+
+# SMS table config
+TABLE_OUTGOING_SMS=outgoing_sms
+COLUMN_PRIMARY_KEY=id
+COLUMN_MSISDN=msisdn
+COLUMN_TEXT=text
+COLUMN_SENDER=sender_name
+COLUMN_SENT_AT=sent_at
 ```
 
 ### <b>Step 3</b>: Install composer dependencies
@@ -58,11 +70,11 @@ composer install
 
 | outgoing_sms             |
 |--------------------------|
-| id           <span style="text-align:right">PRIMARY_KEY</span>       |
-| msisdn       <span style="text-align:right">VARCHAR(255)</span>      |
-| text         <span style="text-align:right">TEXT</span>              |
-| sender_name  <span style="text-align:right">VARCHAR(255)</span>      |
-| sent_at      <span style="text-align:right">TIMESTAMP </span>        |
+| <b>id</b>           <span style="text-align:right; font-style: italic">PRIMARY_KEY</span>       |
+| <b>msisdn</b>       <span style="text-align:right; font-style: italic">VARCHAR(255)</span>      |
+| <b>text</b>         <span style="text-align:right; font-style: italic">TEXT</span>              |
+| <b>sender_name</b>  <span style="text-align:right; font-style: italic">VARCHAR(255)</span>      |
+| <b>sent_at<b>      <span style="text-align:right; font-style: italic">TIMESTAMP </span>        |
 
 You can create this table yourself directly on your DB 
 
