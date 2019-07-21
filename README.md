@@ -68,8 +68,8 @@ composer install
 
 * <i>Option 1</i>: use the default table schema for messages
 
-| outgoing_sms  ||
-|-------------------|-------:|
+| <td colspan=2>outgoing_sms ||
+|-------------------|:-------|
 | <b>id</b>         |  <span style="font-style: italic">PRIMARY_KEY</span>       |
 | <b>msisdn</b>     |  <span style="font-style: italic">VARCHAR(255)</span>      |
 | <b>text</b>       |  <span style="font-style: italic">TEXT</span>              |
