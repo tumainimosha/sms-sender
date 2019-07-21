@@ -53,13 +53,15 @@ class ProcessOutgoing extends Command
 
             $smsService = new SmsService();
 
+            $primaryKey = config('sms-sender.column.primary_key');
+            $msisdn_column = config('sms-sender.column.msisdn');
+            $text_column = config('sms-sender.column.text');
+            $sent_at_column = config('sms-sender.column.sent_at');
+            $from_column = config('sms-sender.column.sender_name');
+
             // push sms
             foreach ($messages as $message) {
-                $msisdn_column = config('sms-sender.column.msisdn');
-                $text_column = config('sms-sender.column.text');
-                $sent_at_column = config('sms-sender.column.sent_at');
-                $from_column = config('sms-sender.column.sender_name');
-
+                $rowId = $message->$primaryKey;
                 $msisdn = $message->$msisdn_column;
                 $text = $message->$text_column;
                 $from = $message->$from_column;
@@ -68,9 +70,9 @@ class ProcessOutgoing extends Command
                 logger("Sending To: {$msisdn}, From: {$from}, Content: {$text}");
 
                 $smsService->send($msisdn, $text, $from);
-
                 
                 DB::table($table)
+                    ->where($primaryKey, '=', $rowId)
                     ->update([
                         "$sent_at_column" => now(),
                     ]);
